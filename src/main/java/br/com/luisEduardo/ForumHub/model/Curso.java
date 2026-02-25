@@ -20,14 +20,14 @@ import java.util.List;
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String nome;
-    String categoria;
+    private Long id;
+    private String nome;
+    private String categoria;
 
     //RELACIONAMENTOS
 
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<Topico> topicos;
+    private List<Topico> topicos;
 
     public Curso(DadosCadastroCurso dados) {
         this.id = null;

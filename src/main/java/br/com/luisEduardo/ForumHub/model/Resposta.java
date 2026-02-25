@@ -19,19 +19,19 @@ import java.time.LocalDateTime;
 public class Resposta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String mensagem;
-    LocalDateTime dataCriacao;
-    String solucao;
+    private Long id;
+    private String mensagem;
+    private LocalDateTime dataCriacao;
+    private String solucao;
 
     //RELACIONAMENTOS
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
-    Usuario usuario;
+    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "topico_id")
-    Topico topico;
+    private Topico topico;
 
 }

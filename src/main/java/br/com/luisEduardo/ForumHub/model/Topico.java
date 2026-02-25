@@ -27,13 +27,13 @@ public class Topico {
     //RELACIONAMENTOS
 
     @OneToMany (mappedBy = "topico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<Resposta> respostas;
+    private List<Resposta> respostas;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
-    Usuario usuario;
+    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
-    Curso curso;
+    private Curso curso;
 }
