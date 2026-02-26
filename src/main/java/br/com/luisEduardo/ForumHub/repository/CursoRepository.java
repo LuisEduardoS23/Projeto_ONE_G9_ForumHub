@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CursoRepository extends JpaRepository<Curso, Integer> {
+public interface CursoRepository extends JpaRepository<Curso, Long> {
 
 
     List<Curso> nome(String nome);
