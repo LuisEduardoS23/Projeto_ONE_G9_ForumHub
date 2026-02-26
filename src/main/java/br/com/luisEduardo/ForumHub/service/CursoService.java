@@ -27,4 +27,8 @@ public class CursoService {
         return new DadosRetornoCadastroCurso(curso);
     }
 
+    public Curso buscarCursoPorId(Long id){
+        return cursoRepository.getReferenceById(id);
+    }
+
 }

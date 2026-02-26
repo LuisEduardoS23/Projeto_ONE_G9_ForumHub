@@ -1,5 +1,6 @@
 package br.com.luisEduardo.ForumHub.model;
 
+import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosCadastroTopico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -36,4 +37,12 @@ public class Topico {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
     private Curso curso;
+
+
+    public Topico(DadosCadastroTopico dados, Usuario usuarioDoTopico, Curso cursoDoTopico) {
+        this.titulo = dados.titulo();
+        this.mensagem = dados.mensagem();
+        this.usuario = usuarioDoTopico;
+        this.curso = cursoDoTopico;
+    }
 }

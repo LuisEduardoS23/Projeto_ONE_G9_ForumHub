@@ -39,4 +39,8 @@ public class UsuarioService {
     public String criptografarSenha(String senha){
         return passwordEncoder.encode(senha);
     }
+
+    public Usuario buscarUsuarioPorId(Long id){
+        return repository.getReferenceById(id);
+    }
 }
