@@ -3,7 +3,6 @@ package br.com.luisEduardo.ForumHub.validations.topico;
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosCadastroTopico;
 import br.com.luisEduardo.ForumHub.exceptions.ValidacaoException;
 import br.com.luisEduardo.ForumHub.repository.UsuarioRepository;
-import br.com.luisEduardo.ForumHub.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
