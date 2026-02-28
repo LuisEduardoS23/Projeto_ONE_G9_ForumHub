@@ -1,12 +1,13 @@
 package br.com.luisEduardo.ForumHub.model;
 
+import br.com.luisEduardo.ForumHub.dto.respostaDTOS.DadosCadastroResposta;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
@@ -21,7 +22,7 @@ public class Resposta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String mensagem;
-    private LocalDateTime dataCriacao;
+    private LocalDate datacriacao;
     private String solucao;
 
     //RELACIONAMENTOS
@@ -34,4 +35,13 @@ public class Resposta {
     @JoinColumn(name = "topico_id")
     private Topico topico;
 
+
+    public Resposta(DadosCadastroResposta dados, Topico topicoDaResposta) {
+        this.id = null;
+        this.mensagem = dados.mensagem();
+        this.solucao = dados.solucao();
+        this.datacriacao = LocalDate.now();
+        this.topico = topicoDaResposta;
+        this.usuario = topicoDaResposta.getUsuario();
+    }
 }

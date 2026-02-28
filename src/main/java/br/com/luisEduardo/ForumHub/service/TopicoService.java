@@ -2,6 +2,7 @@ package br.com.luisEduardo.ForumHub.service;
 
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosCadastroTopico;
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosRetornoCadastroTopico;
+import br.com.luisEduardo.ForumHub.model.Curso;
 import br.com.luisEduardo.ForumHub.model.Topico;
 import br.com.luisEduardo.ForumHub.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class TopicoService {
 
         return new DadosRetornoCadastroTopico(novoTopico);
     }
+
+    public Topico buscarTopicoPorId(Long id){
+        return repository.getReferenceById(id);
+    }
+
 
 }

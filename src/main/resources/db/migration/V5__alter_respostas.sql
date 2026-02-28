@@ -1,0 +1,1 @@
+ALTER TABLE respostas ALTER COLUMN "datacriacao" TYPE TIMESTAMP;

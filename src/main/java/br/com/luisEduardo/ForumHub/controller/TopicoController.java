@@ -1,8 +1,6 @@
 package br.com.luisEduardo.ForumHub.controller;
 
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosCadastroTopico;
-import br.com.luisEduardo.ForumHub.dto.usuarioDTOS.DadosRetornoCadastroUsuario;
-import br.com.luisEduardo.ForumHub.model.Topico;
 import br.com.luisEduardo.ForumHub.service.TopicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
