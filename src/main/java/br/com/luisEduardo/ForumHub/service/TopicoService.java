@@ -5,8 +5,11 @@ import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosRetornoCadastroTopico;
 import br.com.luisEduardo.ForumHub.model.Curso;
 import br.com.luisEduardo.ForumHub.model.Topico;
 import br.com.luisEduardo.ForumHub.repository.TopicoRepository;
+import br.com.luisEduardo.ForumHub.validations.topico.IvalidacaoTopico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TopicoService {
@@ -20,9 +23,12 @@ public class TopicoService {
     @Autowired
     private CursoService cursoService;
 
+    @Autowired
+    private List<IvalidacaoTopico> validacoes;
+
 
     public DadosRetornoCadastroTopico cadastrarTopico(DadosCadastroTopico dados){
-        //validacoes aqui
+        validacoes.forEach(v -> v.validar(dados));
 
         var cursoDoTopico = cursoService.buscarCursoPorId(dados.idCurso());
         var usuarioDoTopico = usuarioService.buscarUsuarioPorId(dados.idUsuario());
