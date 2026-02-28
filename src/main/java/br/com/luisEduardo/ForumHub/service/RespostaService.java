@@ -27,7 +27,7 @@ public class RespostaService {
         //validacoes aqui
         var topicoDaResposta = topicoRepository.getReferenceById(dados.idTopico());
         var usuarioDaResposta = usuarioRepository.getReferenceById(dados.idUsuario());
-        var resposta = new Resposta(dados, topicoDaResposta);
+        var resposta = new Resposta(dados, topicoDaResposta, usuarioDaResposta);
         repository.save(resposta);
         return new DadosRetornoCadastroResposta(resposta);
     }

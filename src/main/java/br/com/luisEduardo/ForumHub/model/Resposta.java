@@ -35,13 +35,12 @@ public class Resposta {
     @JoinColumn(name = "topico_id")
     private Topico topico;
 
-
-    public Resposta(DadosCadastroResposta dados, Topico topicoDaResposta) {
+    public Resposta(DadosCadastroResposta dados, Topico topicoDaResposta, Usuario usuarioDaResposta) {
         this.id = null;
         this.mensagem = dados.mensagem();
         this.solucao = dados.solucao();
         this.datacriacao = LocalDate.now();
         this.topico = topicoDaResposta;
-        this.usuario = topicoDaResposta.getUsuario();
+        this.usuario = usuarioDaResposta;
     }
 }
