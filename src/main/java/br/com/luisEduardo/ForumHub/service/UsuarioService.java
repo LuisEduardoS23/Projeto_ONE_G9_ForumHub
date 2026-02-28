@@ -23,12 +23,13 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-//    @Autowired
-//    private List<IValidacaoUsuario> validacoes;
+    @Autowired
+    private List<IValidacaoUsuario> validacoes;
 
 
     public DadosRetornoCadastroUsuario cadastrarNovoUsuario(DadosCadastroUsuario dados){
-        //validacoes.forEach(v -> v.validar(dados));
+        validacoes.forEach(v -> v.validar(dados));
+
         var senhaCriptografada = criptografarSenha(dados.senha());
         System.out.println(senhaCriptografada);
         var usuario = new Usuario(dados.nome(), dados.email(), senhaCriptografada);
