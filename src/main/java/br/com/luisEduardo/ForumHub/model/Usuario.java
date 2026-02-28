@@ -33,6 +33,7 @@ public class Usuario {
 
 
     public Usuario(String nome, String email, String senhaCriptografada) {
+        this.id = null;
         this.nome = nome;
         this.email = email;
         this.senha = senhaCriptografada;

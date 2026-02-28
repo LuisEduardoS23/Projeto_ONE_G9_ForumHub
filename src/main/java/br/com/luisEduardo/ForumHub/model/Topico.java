@@ -40,6 +40,7 @@ public class Topico {
 
 
     public Topico(DadosCadastroTopico dados, Usuario usuarioDoTopico, Curso cursoDoTopico) {
+        this.id = null;
         this.titulo = dados.titulo();
         this.mensagem = dados.mensagem();
         this.usuario = usuarioDoTopico;
