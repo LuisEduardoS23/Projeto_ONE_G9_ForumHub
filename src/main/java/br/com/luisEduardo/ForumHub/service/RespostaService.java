@@ -6,8 +6,11 @@ import br.com.luisEduardo.ForumHub.model.Resposta;
 import br.com.luisEduardo.ForumHub.repository.RespostaRepository;
 import br.com.luisEduardo.ForumHub.repository.TopicoRepository;
 import br.com.luisEduardo.ForumHub.repository.UsuarioRepository;
+import br.com.luisEduardo.ForumHub.validations.resposta.IValidacaoResposta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RespostaService {
@@ -21,10 +24,13 @@ public class RespostaService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private List<IValidacaoResposta> validacoes;
 
 
     public DadosRetornoCadastroResposta cadastrarResposta(DadosCadastroResposta dados) {
-        //validacoes aqui
+        validacoes.forEach(v -> v.validar(dados));
+
         var topicoDaResposta = topicoRepository.getReferenceById(dados.idTopico());
         var usuarioDaResposta = usuarioRepository.getReferenceById(dados.idUsuario());
         var resposta = new Resposta(dados, topicoDaResposta, usuarioDaResposta);
