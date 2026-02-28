@@ -4,7 +4,9 @@ import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosCadastroTopico;
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosRetornoCadastroTopico;
 import br.com.luisEduardo.ForumHub.model.Curso;
 import br.com.luisEduardo.ForumHub.model.Topico;
+import br.com.luisEduardo.ForumHub.repository.CursoRepository;
 import br.com.luisEduardo.ForumHub.repository.TopicoRepository;
+import br.com.luisEduardo.ForumHub.repository.UsuarioRepository;
 import br.com.luisEduardo.ForumHub.validations.topico.IvalidacaoTopico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +20,10 @@ public class TopicoService {
     private TopicoRepository repository;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private CursoService cursoService;
+    private CursoRepository cursoRepository;
 
     @Autowired
     private List<IvalidacaoTopico> validacoes;
@@ -30,16 +32,12 @@ public class TopicoService {
     public DadosRetornoCadastroTopico cadastrarTopico(DadosCadastroTopico dados){
         validacoes.forEach(v -> v.validar(dados));
 
-        var cursoDoTopico = cursoService.buscarCursoPorId(dados.idCurso());
-        var usuarioDoTopico = usuarioService.buscarUsuarioPorId(dados.idUsuario());
+        var cursoDoTopico = cursoRepository.getReferenceById(dados.idCurso());
+        var usuarioDoTopico = usuarioRepository.getReferenceById(dados.idUsuario());
         var novoTopico = new Topico(dados, usuarioDoTopico, cursoDoTopico);
         repository.save(novoTopico);
 
         return new DadosRetornoCadastroTopico(novoTopico);
-    }
-
-    public Topico buscarTopicoPorId(Long id){
-        return repository.getReferenceById(id);
     }
 
 

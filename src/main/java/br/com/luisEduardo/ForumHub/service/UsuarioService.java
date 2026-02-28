@@ -41,7 +41,4 @@ public class UsuarioService {
         return passwordEncoder.encode(senha);
     }
 
-    public Usuario buscarUsuarioPorId(Long id){
-        return repository.getReferenceById(id);
-    }
 }
