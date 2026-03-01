@@ -1,7 +1,9 @@
 package br.com.luisEduardo.ForumHub.service;
 
 import br.com.luisEduardo.ForumHub.dto.usuarioDTOS.DadosCadastroUsuario;
+import br.com.luisEduardo.ForumHub.dto.usuarioDTOS.DadosDetalhamentoUsuario;
 import br.com.luisEduardo.ForumHub.dto.usuarioDTOS.DadosRetornoCadastroUsuario;
+import br.com.luisEduardo.ForumHub.exceptions.ValidacaoException;
 import br.com.luisEduardo.ForumHub.infra.security.SecurityConfig;
 import br.com.luisEduardo.ForumHub.model.Usuario;
 import br.com.luisEduardo.ForumHub.repository.UsuarioRepository;
@@ -41,4 +43,12 @@ public class UsuarioService {
         return passwordEncoder.encode(senha);
     }
 
+    public DadosDetalhamentoUsuario detalharUsuarioPeloId(Long id) {
+        var usuario = repository.findUsuarioById(id);
+        if(usuario.isEmpty()){
+            throw new ValidacaoException("Nenhum usuário com esse id encontrado!");
+        }
+
+        return new DadosDetalhamentoUsuario(usuario.get());
+    }
 }
