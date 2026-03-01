@@ -1,12 +1,14 @@
 package br.com.luisEduardo.ForumHub.service;
 
 import br.com.luisEduardo.ForumHub.dto.respostaDTOS.DadosCadastroResposta;
+import br.com.luisEduardo.ForumHub.dto.respostaDTOS.DadosDetalhamentoResposta;
 import br.com.luisEduardo.ForumHub.dto.respostaDTOS.DadosRetornoCadastroResposta;
 import br.com.luisEduardo.ForumHub.model.Resposta;
 import br.com.luisEduardo.ForumHub.repository.RespostaRepository;
 import br.com.luisEduardo.ForumHub.repository.TopicoRepository;
 import br.com.luisEduardo.ForumHub.repository.UsuarioRepository;
 import br.com.luisEduardo.ForumHub.validations.resposta.IValidacaoResposta;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,4 +40,12 @@ public class RespostaService {
         return new DadosRetornoCadastroResposta(resposta);
     }
 
+    public DadosDetalhamentoResposta detalharRespostaPeloId(Long id) {
+            var resposta = repository.findRespostasById(id);
+            if(resposta.isEmpty()){
+                throw new EntityNotFoundException();
+            }
+
+            return new DadosDetalhamentoResposta(resposta.get());
+    }
 }
