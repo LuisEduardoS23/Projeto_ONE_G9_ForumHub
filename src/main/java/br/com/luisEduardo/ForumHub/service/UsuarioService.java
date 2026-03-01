@@ -8,6 +8,7 @@ import br.com.luisEduardo.ForumHub.infra.security.SecurityConfig;
 import br.com.luisEduardo.ForumHub.model.Usuario;
 import br.com.luisEduardo.ForumHub.repository.UsuarioRepository;
 import br.com.luisEduardo.ForumHub.validations.usuario.IValidacaoUsuario;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -46,7 +47,7 @@ public class UsuarioService {
     public DadosDetalhamentoUsuario detalharUsuarioPeloId(Long id) {
         var usuario = repository.findUsuarioById(id);
         if(usuario.isEmpty()){
-            throw new ValidacaoException("Nenhum usuário com esse id encontrado!");
+            throw new EntityNotFoundException();
         }
 
         return new DadosDetalhamentoUsuario(usuario.get());

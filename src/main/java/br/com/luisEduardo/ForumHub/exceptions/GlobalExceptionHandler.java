@@ -1,5 +1,7 @@
 package br.com.luisEduardo.ForumHub.exceptions;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,6 +29,13 @@ public class GlobalExceptionHandler {
         var erros = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(erros.stream().map(DadosErroValidacao::new).toList());
     }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity tratarErro404(EntityNotFoundException ex) {
+        return ResponseEntity.notFound().build();
+    }
+
+
 
 }
 
