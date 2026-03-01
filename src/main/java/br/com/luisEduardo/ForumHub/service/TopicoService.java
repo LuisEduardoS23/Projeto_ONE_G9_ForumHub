@@ -1,13 +1,14 @@
 package br.com.luisEduardo.ForumHub.service;
 
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosCadastroTopico;
+import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosDetalhamentoTopico;
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosRetornoCadastroTopico;
-import br.com.luisEduardo.ForumHub.model.Curso;
 import br.com.luisEduardo.ForumHub.model.Topico;
 import br.com.luisEduardo.ForumHub.repository.CursoRepository;
 import br.com.luisEduardo.ForumHub.repository.TopicoRepository;
 import br.com.luisEduardo.ForumHub.repository.UsuarioRepository;
 import br.com.luisEduardo.ForumHub.validations.topico.IvalidacaoTopico;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,4 +42,12 @@ public class TopicoService {
     }
 
 
+    public DadosDetalhamentoTopico detalharTopicoPeloId(Long id) {
+        var topico = repository.findTopicosById(id);
+        if(topico.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+
+        return new DadosDetalhamentoTopico(topico.get());
+    }
 }
