@@ -29,4 +29,10 @@ public class TopicoController{
         return ResponseEntity.ok(detalhesTopico);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletar (@PathVariable Long id){
+        service.deletarTopicoPeloId(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

@@ -14,7 +14,7 @@ public class ValidarIdDoTopicoRelacionadoAResposta implements IValidacaoResposta
 
     @Override
     public void validar(DadosCadastroResposta dados) {
-        var topicoComIdPassado = topicoRepository.findTopicosById(dados.idTopico());
+        var topicoComIdPassado = topicoRepository.findTopicosByIdAndStatusTrue(dados.idTopico());
 
         if(topicoComIdPassado.isEmpty()){
             throw new ValidacaoException("Topico com ID passado não existe!");

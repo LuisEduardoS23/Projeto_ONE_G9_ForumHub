@@ -45,7 +45,9 @@ public class RespostaService {
             if(resposta.isEmpty()){
                 throw new EntityNotFoundException();
             }
-
+            if (!resposta.get().getTopico().isStatus()){
+                throw new EntityNotFoundException();
+            }
             return new DadosDetalhamentoResposta(resposta.get());
     }
 }

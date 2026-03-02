@@ -45,5 +45,10 @@ public class Topico {
         this.mensagem = dados.mensagem();
         this.usuario = usuarioDoTopico;
         this.curso = cursoDoTopico;
+        this.status = true;
+    }
+
+    public void excluir() {
+        this.status = false;
     }
 }

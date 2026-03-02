@@ -11,6 +11,7 @@ import br.com.luisEduardo.ForumHub.validations.topico.IvalidacaoTopico;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class TopicoService {
     private List<IvalidacaoTopico> validacoes;
 
 
+    @Transactional
     public DadosRetornoCadastroTopico cadastrarTopico(DadosCadastroTopico dados){
         validacoes.forEach(v -> v.validar(dados));
 
@@ -43,11 +45,20 @@ public class TopicoService {
 
 
     public DadosDetalhamentoTopico detalharTopicoPeloId(Long id) {
-        var topico = repository.findTopicosById(id);
+        var topico = repository.findTopicosByIdAndStatusTrue(id);
         if(topico.isEmpty()){
             throw new EntityNotFoundException();
         }
 
         return new DadosDetalhamentoTopico(topico.get());
+    }
+
+    @Transactional
+    public void deletarTopicoPeloId(Long id) {
+        var topico = repository.findTopicosByIdAndStatusTrue(id);
+        if(topico.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        topico.get().excluir();
     }
 }
