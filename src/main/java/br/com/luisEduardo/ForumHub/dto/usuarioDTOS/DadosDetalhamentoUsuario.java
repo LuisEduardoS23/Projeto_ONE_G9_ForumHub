@@ -2,6 +2,7 @@ package br.com.luisEduardo.ForumHub.dto.usuarioDTOS;
 
 import br.com.luisEduardo.ForumHub.dto.respostaDTOS.DadosDetalhamentoResposta;
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosDetalhamentoTopico;
+import br.com.luisEduardo.ForumHub.model.Resposta;
 import br.com.luisEduardo.ForumHub.model.Topico;
 import br.com.luisEduardo.ForumHub.model.Usuario;
 
@@ -22,7 +23,7 @@ public record DadosDetalhamentoUsuario(
                 usuario.getNome(),
                 usuario.getEmail(),
                 usuario.getTopicos().stream().filter(Topico::isStatus).map(DadosDetalhamentoTopico::new).collect(Collectors.toList()),
-                usuario.getRespostas().stream().map(DadosDetalhamentoResposta::new).collect(Collectors.toList())
+                usuario.getRespostas().stream().filter(Resposta::isAtivo).map(DadosDetalhamentoResposta::new).collect(Collectors.toList())
                 );
     }
 }

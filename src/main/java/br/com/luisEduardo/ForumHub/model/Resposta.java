@@ -24,6 +24,7 @@ public class Resposta {
     private String mensagem;
     private LocalDate datacriacao;
     private String solucao;
+    private boolean ativo;
 
     //RELACIONAMENTOS
 
@@ -37,10 +38,15 @@ public class Resposta {
 
     public Resposta(DadosCadastroResposta dados, Topico topicoDaResposta, Usuario usuarioDaResposta) {
         this.id = null;
+        this.ativo = true;
         this.mensagem = dados.mensagem();
         this.solucao = dados.solucao();
         this.datacriacao = LocalDate.now();
         this.topico = topicoDaResposta;
         this.usuario = usuarioDaResposta;
+    }
+
+    public void deletar() {
+        this.ativo = false;
     }
 }

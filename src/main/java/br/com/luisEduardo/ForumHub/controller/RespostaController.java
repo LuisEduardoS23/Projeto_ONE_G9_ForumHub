@@ -28,4 +28,11 @@ public class RespostaController {
         var detalhesResposta = service.detalharRespostaPeloId(id);
         return ResponseEntity.ok(detalhesResposta);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletar (@PathVariable Long id){
+        service.deletarRespostaPeloId(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

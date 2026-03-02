@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface RespostaRepository extends JpaRepository<Resposta, Long> {
-    Optional<Resposta> findRespostasById(Long id);
+    Optional<Resposta> findRespostasByIdAndAtivoTrue(Long id);
 }

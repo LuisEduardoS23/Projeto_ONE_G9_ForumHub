@@ -1,6 +1,7 @@
 package br.com.luisEduardo.ForumHub.dto.topicoDTOS;
 
 import br.com.luisEduardo.ForumHub.dto.respostaDTOS.DadosDetalhamentoResposta;
+import br.com.luisEduardo.ForumHub.model.Resposta;
 import br.com.luisEduardo.ForumHub.model.Topico;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public record DadosDetalhamentoTopico(
               topico.getTitulo(),
               topico.getMensagem(),
               topico.isStatus(),
-              topico.getRespostas().stream().map(DadosDetalhamentoResposta::new).collect(Collectors.toList()),
+              topico.getRespostas().stream().filter(Resposta::isAtivo).map(DadosDetalhamentoResposta::new).collect(Collectors.toList()),
               topico.getUsuario().getId(),
               topico.getUsuario().getNome(),
               topico.getCurso().getId(),

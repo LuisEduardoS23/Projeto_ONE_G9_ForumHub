@@ -11,6 +11,7 @@ import br.com.luisEduardo.ForumHub.validations.resposta.IValidacaoResposta;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class RespostaService {
     private List<IValidacaoResposta> validacoes;
 
 
+    @Transactional
     public DadosRetornoCadastroResposta cadastrarResposta(DadosCadastroResposta dados) {
         validacoes.forEach(v -> v.validar(dados));
 
@@ -41,7 +43,7 @@ public class RespostaService {
     }
 
     public DadosDetalhamentoResposta detalharRespostaPeloId(Long id) {
-            var resposta = repository.findRespostasById(id);
+            var resposta = repository.findRespostasByIdAndAtivoTrue(id);
             if(resposta.isEmpty()){
                 throw new EntityNotFoundException();
             }
@@ -49,5 +51,14 @@ public class RespostaService {
                 throw new EntityNotFoundException();
             }
             return new DadosDetalhamentoResposta(resposta.get());
+    }
+
+    @Transactional
+    public void deletarRespostaPeloId(Long id) {
+        var resposta = repository.findRespostasByIdAndAtivoTrue(id);
+        if (resposta.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        resposta.get().deletar();
     }
 }
