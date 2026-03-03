@@ -29,6 +29,11 @@ public class CursoController {
         return ResponseEntity.ok(dadosDetalhamento);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletar (@PathVariable Long id) {
+        service.deletarCursoPeloId(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

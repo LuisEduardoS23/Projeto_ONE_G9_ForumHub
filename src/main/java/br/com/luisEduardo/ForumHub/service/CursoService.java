@@ -9,6 +9,7 @@ import br.com.luisEduardo.ForumHub.validations.curso.IValidacaoCurso;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class CursoService {
     @Autowired
     List<IValidacaoCurso> validacaoCurso;
 
-
+    @Transactional
     public DadosRetornoCadastroCurso cadastrarCurso (DadosCadastroCurso dados){
         validacaoCurso.forEach(v -> v.validar(dados));
         Curso curso = new Curso(dados);
@@ -31,10 +32,19 @@ public class CursoService {
 
 
     public DadosDetalhamentoCurso detalharCursoPeloId(Long id) {
-        var curso = cursoRepository.findCursoById(id);
+        var curso = cursoRepository.findCursoByIdAndAtivoTrue(id);
         if (curso.isEmpty()){
             throw new EntityNotFoundException();
         }
         return new DadosDetalhamentoCurso(curso.get());
+    }
+
+    @Transactional
+    public void deletarCursoPeloId(Long id) {
+        var curso = cursoRepository.findCursoByIdAndAtivoTrue(id);
+        if (curso.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        curso.get().deletar();
     }
 }

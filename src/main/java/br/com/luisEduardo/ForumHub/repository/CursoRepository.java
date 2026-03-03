@@ -1,20 +1,14 @@
 package br.com.luisEduardo.ForumHub.repository;
 
 import br.com.luisEduardo.ForumHub.model.Curso;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface CursoRepository extends JpaRepository<Curso, Long> {
 
-
-    List<Curso> nome(String nome);
-
     Optional<Curso> getReferenceByNome(String nomeCurso);
 
-    Optional<Curso> findCursoById(Long id);
+    Optional<Curso> findCursoByIdAndAtivoTrue(Long id);
 }

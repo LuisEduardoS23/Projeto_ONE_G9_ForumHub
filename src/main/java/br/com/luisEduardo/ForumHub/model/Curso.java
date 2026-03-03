@@ -23,6 +23,7 @@ public class Curso {
     private Long id;
     private String nome;
     private String categoria;
+    private boolean ativo;
 
     //RELACIONAMENTOS
 
@@ -31,7 +32,12 @@ public class Curso {
 
     public Curso(DadosCadastroCurso dados) {
         this.id = null;
+        this.ativo = true;
         this.nome = dados.nome();
         this.categoria = dados.categoria();
+    }
+
+    public void deletar() {
+        this.ativo = false;
     }
 }

@@ -14,7 +14,7 @@ public class ValidarIdDoCursoRelacionadoAoTopico implements IvalidacaoTopico{
 
     @Override
     public void validar(DadosCadastroTopico dados) {
-        var cursoComIdPassado = cursoRepository.findCursoById(dados.idCurso());
+        var cursoComIdPassado = cursoRepository.findCursoByIdAndAtivoTrue(dados.idCurso());
         System.out.println(cursoComIdPassado);
 
         if(cursoComIdPassado.isEmpty()){
