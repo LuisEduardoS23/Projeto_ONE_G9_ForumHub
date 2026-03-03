@@ -60,4 +60,11 @@ public class UsuarioService {
         }
         usuario.get().deletar();
     }
+
+    @Transactional
+    public void reativarContaCasoEstejaDesativada(Usuario usuario) {
+        if (!usuario.isAtivo()){
+            usuario.reativar();
+        }
+    }
 }
