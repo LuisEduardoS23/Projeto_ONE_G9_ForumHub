@@ -14,7 +14,7 @@ public class ValidarIdDoUsuarioRealcionadoAoTopico implements IvalidacaoTopico{
 
     @Override
     public void validar(DadosCadastroTopico dados) {
-        var usuarioComIdPassado = usuarioRepository.findUsuarioById(dados.idUsuario());
+        var usuarioComIdPassado = usuarioRepository.findUsuarioByIdAndAtivoTrue(dados.idUsuario());
 
         if(usuarioComIdPassado.isEmpty()){
             throw new ValidacaoException("Usuario com ID passado não existe!");

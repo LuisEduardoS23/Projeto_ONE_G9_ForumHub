@@ -30,4 +30,10 @@ public class UsuarioController {
         return ResponseEntity.ok(detalhesUsuario);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletar (@PathVariable Long id){
+        usuarioService.deletarUsuarioPeloId(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

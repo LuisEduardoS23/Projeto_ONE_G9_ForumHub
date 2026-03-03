@@ -22,6 +22,7 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private boolean ativo;
 
     //RELACIONAMENTOS
 
@@ -34,8 +35,13 @@ public class Usuario {
 
     public Usuario(String nome, String email, String senhaCriptografada) {
         this.id = null;
+        this.ativo = true;
         this.nome = nome;
         this.email = email;
         this.senha = senhaCriptografada;
+    }
+
+    public void deletar() {
+        this.ativo = false;
     }
 }

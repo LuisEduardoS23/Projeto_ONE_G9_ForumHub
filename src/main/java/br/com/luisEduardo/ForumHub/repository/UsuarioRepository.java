@@ -14,10 +14,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     UserDetails findByEmail(String emailUsuario);
 
-    Optional<Usuario> findByNome(@NotBlank(message = "O nome do usuário não deve ser nulo ou em branco!") String nome);
+    Optional<Usuario> findByNome(String nome);
 
 
-    Optional<Usuario> getReferenceByEmail(@NotBlank(message = "O e-mail do usuário não deve ser nulo ou em branco!") @Email(message = "Formato de e-mail inválido!") String email);
+    Optional<Usuario> getReferenceByEmail( String email);
 
-    Optional<Usuario> findUsuarioById(Long id);
+    Optional<Usuario> findUsuarioByIdAndAtivoTrue(Long id);
 }

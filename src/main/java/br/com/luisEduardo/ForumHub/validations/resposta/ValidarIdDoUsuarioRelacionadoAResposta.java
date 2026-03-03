@@ -14,7 +14,7 @@ public class ValidarIdDoUsuarioRelacionadoAResposta implements IValidacaoRespost
 
     @Override
     public void validar(DadosCadastroResposta dados) {
-        var usuarioComIDPassado = usuarioRepository.findUsuarioById(dados.idUsuario());
+        var usuarioComIDPassado = usuarioRepository.findUsuarioByIdAndAtivoTrue(dados.idUsuario());
 
         if(usuarioComIDPassado.isEmpty()){
             throw new ValidacaoException("Usuario com ID passado não existe!");

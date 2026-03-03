@@ -10,6 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class UsuarioService {
     private List<IValidacaoUsuario> validacoes;
 
 
+    @Transactional
     public DadosRetornoCadastroUsuario cadastrarNovoUsuario(DadosCadastroUsuario dados){
         validacoes.forEach(v -> v.validar(dados));
 
@@ -40,12 +42,22 @@ public class UsuarioService {
         return passwordEncoder.encode(senha);
     }
 
+
     public DadosDetalhamentoUsuario detalharUsuarioPeloId(Long id) {
-        var usuario = repository.findUsuarioById(id);
+        var usuario = repository.findUsuarioByIdAndAtivoTrue(id);
         if(usuario.isEmpty()){
             throw new EntityNotFoundException();
         }
 
         return new DadosDetalhamentoUsuario(usuario.get());
+    }
+
+    @Transactional
+    public void deletarUsuarioPeloId(Long id) {
+        var usuario = repository.findUsuarioByIdAndAtivoTrue(id);
+        if(usuario.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        usuario.get().deletar();
     }
 }
