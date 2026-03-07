@@ -28,6 +28,7 @@ public class SecurityConfig {
                         sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 ).authorizeHttpRequests(authorizeRequests -> authorizeRequests.
                         requestMatchers("/login").permitAll().
+                        requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll().
                         requestMatchers(HttpMethod.POST, "/usuarios/cadastro").permitAll()
                         .anyRequest().authenticated()
 
