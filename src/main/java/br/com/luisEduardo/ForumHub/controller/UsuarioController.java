@@ -4,6 +4,8 @@ import br.com.luisEduardo.ForumHub.dto.usuarioDTOS.DadosCadastroUsuario;
 import br.com.luisEduardo.ForumHub.dto.usuarioDTOS.DadosDetalhamentoUsuario;
 import br.com.luisEduardo.ForumHub.dto.usuarioDTOS.DadosRetornoCadastroUsuario;
 import br.com.luisEduardo.ForumHub.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +26,14 @@ public class UsuarioController {
         return ResponseEntity.created(uri).body(dadosResposta);
     }
 
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoUsuario> detalhar (@PathVariable Long id){
         var detalhesUsuario = usuarioService.detalharUsuarioPeloId(id);
         return ResponseEntity.ok(detalhesUsuario);
     }
 
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     @DeleteMapping("/{id}")
     public ResponseEntity deletar (@PathVariable Long id){
         usuarioService.deletarUsuarioPeloId(id);

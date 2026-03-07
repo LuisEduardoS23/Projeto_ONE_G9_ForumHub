@@ -3,6 +3,7 @@ package br.com.luisEduardo.ForumHub.controller;
 import br.com.luisEduardo.ForumHub.dto.respostaDTOS.DadosCadastroResposta;
 import br.com.luisEduardo.ForumHub.dto.respostaDTOS.DadosDetalhamentoResposta;
 import br.com.luisEduardo.ForumHub.service.RespostaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/respostas")
+@SecurityRequirement(name = "bearer-key")
 public class RespostaController {
 
     @Autowired

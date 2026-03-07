@@ -3,6 +3,8 @@ package br.com.luisEduardo.ForumHub.controller;
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosCadastroTopico;
 import br.com.luisEduardo.ForumHub.dto.topicoDTOS.DadosDetalhamentoTopico;
 import br.com.luisEduardo.ForumHub.service.TopicoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController{
 
     @Autowired
